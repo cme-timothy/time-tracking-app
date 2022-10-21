@@ -1,5 +1,11 @@
+import { Heading } from "@chakra-ui/react";
+
 function Calender() {
-  return <></>;
+  return (
+    <>
+      <Heading align="center">Calender</Heading>
+    </>
+  );
 }
 
 export default Calender;

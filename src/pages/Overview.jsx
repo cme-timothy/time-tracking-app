@@ -1,5 +1,11 @@
+import { Heading } from "@chakra-ui/react";
+
 function Overview() {
-  return <></>;
+  return (
+    <>
+      <Heading align="center">Overview</Heading>
+    </>
+  );
 }
 
 export default Overview;

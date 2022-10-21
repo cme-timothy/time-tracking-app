@@ -1,5 +1,11 @@
+import { Heading } from "@chakra-ui/react";
+
 function Timer() {
-  return <></>;
+  return (
+    <>
+      <Heading align="center">Timer</Heading>
+    </>
+  );
 }
 
 export default Timer;
