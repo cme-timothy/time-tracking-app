@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import Overview from "../pages/Overview";
-import Timer from "../pages/Timer";
-import Calender from "../pages/Calender";
+import Overview from "../pages/overview/Overview";
+import Timer from "../pages/timer/Timer";
+import Calender from "../pages/calender/Calender";
 
 function Main() {
   return (
