@@ -9,8 +9,8 @@ import { useState } from "react";
 import { Link as ReachLink } from "react-router-dom";
 function Header() {
   const [buttonClick, setButtonClick] = useState({
-    stopWatch: "gray",
-    calendar: "gray",
+    stopWatch: "gray.200",
+    calendar: "gray.200",
     briefcase: "white",
   });
 
@@ -23,13 +23,15 @@ function Header() {
   }
 
   return (
-    <Flex justify="space-around" bg="gray" p="1em">
+    <Flex justify="space-around" bg="gray.200" p="1em">
       <Link as={ReachLink} to="/Timer">
         <Button
-          onClick={() => handleClick("white", "gray", "gray")}
+          onClick={() => handleClick("white", "gray.200", "gray.200")}
           w="6em"
+          h="4em"
           align="center"
           p="0.5em"
+          _hover={{bg: "white"}}
           bg={buttonClick.stopWatch}
         >
           <FontAwesomeIcon icon={faStopwatch} size="3x" />
@@ -37,10 +39,12 @@ function Header() {
       </Link>
       <Link as={ReachLink} to="/Calender">
         <Button
-          onClick={() => handleClick("gray", "white", "gray")}
+          onClick={() => handleClick("gray.200", "white", "gray.200")}
           w="6em"
+          h="4em"
           align="center"
           p="0.5em"
+          _hover={{bg: "white"}}
           bg={buttonClick.calendar}
         >
           <FontAwesomeIcon icon={faCalendar} size="3x" />
@@ -48,10 +52,12 @@ function Header() {
       </Link>
       <Link as={ReachLink} to="/">
         <Button
-          onClick={() => handleClick("gray", "gray", "white")}
+          onClick={() => handleClick("gray.200", "gray.200", "white")}
           w="6em"
+          h="4em"
           align="center"
           p="0.5em"
+          _hover={{bg: "white"}}
           bg={buttonClick.briefcase}
         >
           <FontAwesomeIcon icon={faBriefcase} size="3x" />
