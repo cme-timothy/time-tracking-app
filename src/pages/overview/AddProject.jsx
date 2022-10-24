@@ -10,9 +10,66 @@ import {
   useDisclosure,
   Input,
 } from "@chakra-ui/react";
+import { useEffect, useState, useContext } from "react";
+import axios from "axios";
+import { DataContext } from "../../contexts/DataContext";
+import ProjectColor from "./ProjectColor";
 
 function AddProject() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [inputValue, setInputValue] = useState("");
+  const [projectName, setProjectName] = useState();
+  const { getProjects } = useContext(DataContext);
+  const [projectColor, setProjectColor] = useState("blue.500");
+
+  function addProjectColor(color) {
+    setProjectColor(color);
+  }
+
+  useEffect(() => {
+    async function postProject() {
+      await axios
+        .post("http://localhost:4000/projects", {
+          name: projectName,
+          color: projectColor,
+        })
+        .catch(function (error) {
+          if (error.response) {
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+      getProjects();
+    }
+    if (inputValue !== "") {
+      postProject();
+      setInputValue("");
+    }
+  }, [projectName]);
+
+  function handleChange(event) {
+    const value = event.target.value;
+    setInputValue(value);
+  }
+
+  function handleKeyDown(event) {
+    if (event.key === "Enter" && inputValue !== "") {
+      setProjectName(inputValue);
+      onClose();
+    }
+  }
+
+  function handleClick() {
+    if (inputValue !== "") {
+      setProjectName(inputValue);
+      onClose();
+    }
+  }
 
   return (
     <>
@@ -31,15 +88,19 @@ function AddProject() {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent borderRadius={0} m="25% 1em 75% 1em">
-          <ModalHeader>Add</ModalHeader>
+        <ModalContent borderRadius={0} h="35em">
+          <ModalHeader>New Project</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Input
               type="text"
               placeholder="Project name"
               borderRadius={0}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+              value={inputValue}
             ></Input>
+            <ProjectColor addProjectColor={addProjectColor} />
           </ModalBody>
 
           <ModalFooter>
@@ -47,7 +108,7 @@ function AddProject() {
               colorScheme="green"
               w="100%"
               borderRadius={0}
-              onClick={onClose}
+              onClick={handleClick}
             >
               Add Project
             </Button>
