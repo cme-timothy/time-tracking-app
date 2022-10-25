@@ -1,28 +1,4 @@
 {
-  "tasks": [
-    {
-      "project": "Test",
-      "color": "blue.500",
-      "name": "ves",
-      "id": 1
-    },
-    {
-      "project": "Test 2",
-      "color": "pink.500",
-      "name": "wef",
-      "id": 2
-    }
-  ],
-  "projects": [
-    {
-      "name": "Test",
-      "color": "blue.500",
-      "id": 1
-    },
-    {
-      "name": "Test 2",
-      "color": "pink.500",
-      "id": 2
-    }
-  ]
+  "tasks": [],
+  "projects": []
 }
