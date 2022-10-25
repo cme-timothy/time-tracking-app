@@ -1,4 +1,4 @@
-import { Flex, Heading, Button, Box } from "@chakra-ui/react";
+import { Flex, Heading, Button, Box, Tooltip } from "@chakra-ui/react";
 import { useState, useEffect, useContext } from "react";
 import AddProject from "../overview/AddProject";
 import AddTask from "../overview/AddTask";
@@ -14,6 +14,8 @@ function Overview() {
     getProjects();
     getTasks();
   }, []);
+
+  console.log(projects);
 
   return (
     <>
@@ -33,17 +35,20 @@ function Overview() {
           >
             Projects
           </Button>
-          <Button
-            fontSize="xl"
-            onClick={() => setMenuToggle(false)}
-            borderRadius={0}
-            w="100%"
-            bg={!menuToggle ? "gray.400" : "gray.100"}
-            _active={{ bg: !menuToggle ? "gray.400" : "gray.100" }}
-            _hover={{ bg: "gray.400" }}
-          >
-            Tasks
-          </Button>
+          <Tooltip label={projects.length === 0 && "Create a Project first"}>
+            <Button
+              isDisabled={projects.length === 0 ? true : false}
+              fontSize="xl"
+              onClick={() => setMenuToggle(false)}
+              borderRadius={0}
+              w="100%"
+              bg={!menuToggle ? "gray.400" : "gray.100"}
+              _active={{ bg: !menuToggle ? "gray.400" : "gray.100" }}
+              _hover={{ bg: "gray.400" }}
+            >
+              Tasks
+            </Button>
+          </Tooltip>
         </Flex>
       </Box>
       <Box mt="13em" mb="8em">

@@ -21,7 +21,7 @@ function Timer() {
 
   function handleTimeStamp() {
     if (timeStamp === null) {
-      const timeStamp = new Date().toLocaleString();
+      const timeStamp = new Date().toLocaleString().slice(6, 10);
       setTimeStamp(timeStamp);
     }
   }

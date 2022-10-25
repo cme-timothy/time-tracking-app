@@ -19,6 +19,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { DataContext } from "../../contexts/DataContext";
+import Calender from "../../components/Calender";
 
 function AddTask(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -27,6 +28,7 @@ function AddTask(props) {
   const [project, setProject] = useState(props.projects[0].name);
   const [projectColor, setProjectColor] = useState(props.projects[0].color);
   const { getTasks } = useContext(DataContext);
+  const [date, setDate] = useState();
 
   useEffect(() => {
     async function postTask() {
@@ -35,6 +37,7 @@ function AddTask(props) {
           project: project,
           color: projectColor,
           name: taskName,
+          date: date,
         })
         .catch(function (error) {
           if (error.response) {
@@ -77,6 +80,10 @@ function AddTask(props) {
   function handleMenuClick(project, color) {
     setProject(project);
     setProjectColor(color);
+  }
+
+  function handleCalender(date) {
+    setDate(date);
   }
 
   return (
@@ -133,6 +140,7 @@ function AddTask(props) {
                 })}
               </MenuList>
             </Menu>
+            <Calender date={handleCalender} />
           </ModalBody>
 
           <ModalFooter>
