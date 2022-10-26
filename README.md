@@ -16,12 +16,24 @@ In order to install you need to run:
 npm install
 ```
 
+and:
+
+```
+npm install -g json-server
+```
+
 ## How to run project locally
 
 To setup a local development server, run:
 
 ```
 npm run start
+```
+
+To setup a local JSON server, run:
+
+```
+json-server --watch src/data/db.json --port 4000   
 ```
 
 ## How to build a production bundle
