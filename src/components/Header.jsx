@@ -37,7 +37,7 @@ function Header() {
           <FontAwesomeIcon icon={faStopwatch} size="3x" />
         </Button>
       </Link>
-      <Link as={ReachLink} to="/Calender">
+      <Link as={ReachLink} to="/History">
         <Button
           onClick={() => handleClick("gray.200", "white", "gray.200")}
           w="6em"
