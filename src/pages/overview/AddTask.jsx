@@ -27,13 +27,16 @@ function AddTask(props) {
   const [taskName, setTaskName] = useState();
   const [project, setProject] = useState(props.projects[0].name);
   const [projectColor, setProjectColor] = useState(props.projects[0].color);
+  const [projectId, setProjectId] = useState(props.projects[0].id);
   const { getTasks } = useContext(DataContext);
   const [date, setDate] = useState();
+
+  console.log(props.projects);
 
   useEffect(() => {
     async function postTask() {
       await axios
-        .post("http://localhost:4000/tasks", {
+        .post(`http://localhost:4000/projects/${projectId}/tasks`, {
           project: project,
           color: projectColor,
           name: taskName,
@@ -77,9 +80,10 @@ function AddTask(props) {
     }
   }
 
-  function handleMenuClick(project, color) {
+  function handleMenuClick(project, color, id) {
     setProject(project);
     setProjectColor(color);
+    setProjectId(id);
   }
 
   function handleCalender(date) {
@@ -131,7 +135,9 @@ function AddTask(props) {
                 {props.projects.map((data) => {
                   return (
                     <MenuItem
-                      onClick={() => handleMenuClick(data.name, data.color)}
+                      onClick={() =>
+                        handleMenuClick(data.name, data.color, data.id)
+                      }
                       key={data.id}
                     >
                       {data.name}

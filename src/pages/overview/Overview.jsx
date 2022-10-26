@@ -1,10 +1,11 @@
-import { Flex, Heading, Button, Box, Tooltip } from "@chakra-ui/react";
+import { Flex, Heading, Button, Box, Tooltip, Text } from "@chakra-ui/react";
 import { useState, useEffect, useContext } from "react";
 import AddProject from "../overview/AddProject";
 import AddTask from "../overview/AddTask";
 import Project from "../../components/Project";
 import Task from "../../components/Task";
 import { DataContext } from "../../contexts/DataContext";
+import { nanoid } from "nanoid";
 
 function Overview() {
   const [menuToggle, setMenuToggle] = useState(true);
@@ -14,8 +15,6 @@ function Overview() {
     getProjects();
     getTasks();
   }, []);
-
-  console.log(projects);
 
   return (
     <>
@@ -57,7 +56,7 @@ function Overview() {
             {projects.map((data) => {
               return (
                 <Project
-                  key={data.id}
+                  key={nanoid()}
                   name={data.name}
                   color={data.color}
                   id={data.id}
@@ -67,14 +66,25 @@ function Overview() {
           </Flex>
         ) : (
           <Flex direction="column">
-            {tasks.map((data) => {
+            {projects.map((projectData) => {
               return (
-                <Task
-                  key={data.id}
-                  name={data.name}
-                  color={data.color}
-                  id={data.id}
-                />
+                <>
+                  <Text key={nanoid()} ml="1em" fontSize="lg" color="gray.500">
+                    {projectData.name}
+                  </Text>
+                  {tasks.map((taskData) => {
+                    if (projectData.name === taskData.project) {
+                      return (
+                        <Task
+                          key={nanoid()}
+                          name={taskData.name}
+                          color={taskData.color}
+                          id={taskData.id}
+                        />
+                      );
+                    }
+                  })}
+                </>
               );
             })}
           </Flex>

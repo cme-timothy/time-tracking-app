@@ -6,7 +6,7 @@ import { DataContext } from "../contexts/DataContext";
 import { useContext } from "react";
 
 function Project(props) {
-  const { getProjects } = useContext(DataContext);
+  const { getProjects, getTasks } = useContext(DataContext);
 
   function handleClick() {
     async function deleteProject() {
