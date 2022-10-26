@@ -50,7 +50,7 @@ function Overview() {
           </Tooltip>
         </Flex>
       </Box>
-      <Box mt="13em" mb="8em">
+      <Box mt="11.5em" mb="8em">
         {menuToggle ? (
           <Flex direction="column">
             {projects.map((data) => {
@@ -89,7 +89,6 @@ function Overview() {
             })}
           </>
         )}
-
         <Flex direction="column">
           {menuToggle ? <AddProject /> : <AddTask projects={projects} />}
         </Flex>
