@@ -8,6 +8,7 @@ import {
   MenuItem,
   Flex,
   Tooltip,
+  Box,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useState, useContext, useEffect } from "react";
@@ -35,52 +36,59 @@ function History() {
 
   return (
     <>
-      <Heading m={0} p="1.5em" bg={"gray.200"} align="center">
-        History
-      </Heading>
-      <Menu>
-        <Tooltip label={date === undefined && "Create a Task first"}>
-          <MenuButton
-            isDisabled={date === undefined ? true : false}
-            p="1em"
-            border={0}
-            m="1em 1em 0 1em"
-            as={Button}
-            rightIcon={<ChevronDownIcon fontSize="4xl" />}
-            borderRadius={0}
-          >
-            <Text fontSize="lg" ml="0.5em" align="left">
-              {date === undefined ? "No history" : date}
-            </Text>
-          </MenuButton>
-        </Tooltip>
-        <MenuList>
-          {dates.map((datesData) => {
-            return (
-              <MenuItem
-                onClick={() => handleMenuClick(datesData)}
-                key={datesData}
+      <Box position="fixed" top="0" width="100%" zIndex={1}>
+        <Heading m={0} p="1.5em" bg={"gray.200"} align="center">
+          History
+        </Heading>
+        <Flex justify="space-around">
+          <Menu>
+            <Tooltip label={date === undefined && "Create a Task first"}>
+              <MenuButton
+                isDisabled={date === undefined ? true : false}
+                p="1em"
+                border={0}
+                m="1em 1em 0 1em"
+                as={Button}
+                rightIcon={<ChevronDownIcon fontSize="4xl" />}
+                borderRadius={0}
               >
-                {datesData}
-              </MenuItem>
-            );
+                <Text fontSize="lg" ml="0.5em" align="left">
+                  {date === undefined ? "No history" : date}
+                </Text>
+              </MenuButton>
+            </Tooltip>
+            <MenuList>
+              {dates.map((datesData) => {
+                return (
+                  <MenuItem
+                    onClick={() => handleMenuClick(datesData)}
+                    key={datesData}
+                  >
+                    {datesData}
+                  </MenuItem>
+                );
+              })}
+            </MenuList>
+          </Menu>
+        </Flex>
+      </Box>
+      <Box mt="11.7em" mb="8em">
+        <Flex direction="column">
+          {tasks.map((taskData) => {
+            if (date === taskData.date) {
+              return (
+                <Task
+                  key={uuidv4()}
+                  name={taskData.name}
+                  color={taskData.color}
+                  id={taskData.id}
+                  timer={true}
+                />
+              );
+            }
           })}
-        </MenuList>
-      </Menu>
-      <Flex direction="column">
-        {tasks.map((taskData) => {
-          if (date === taskData.date) {
-            return (
-              <Task
-                key={uuidv4()}
-                name={taskData.name}
-                color={taskData.color}
-                id={taskData.id}
-              />
-            );
-          }
-        })}
-      </Flex>
+        </Flex>
+      </Box>
     </>
   );
 }
