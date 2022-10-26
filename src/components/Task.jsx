@@ -1,4 +1,4 @@
-import { Flex, Text, Button } from "@chakra-ui/react";
+import { Flex, Text, Button, Box } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
@@ -38,12 +38,26 @@ function Task(props) {
       borderLeft="10px solid"
       borderColor={props.color}
     >
-      <Text mt="0.1em" fontSize="lg">
-        {props.name}
-      </Text>
-      <Button bg="gray.200" onClick={handleClick}>
-        <FontAwesomeIcon icon={faTrash} size="lg" />
-      </Button>
+      <Box>
+        <Text mt="0.1em" fontSize="lg">
+          {props.name}
+        </Text>
+        {props.timer && (
+          <Text fontSize="md" color="gray.500">
+            {props.saveTime === props.id ? props.time : "00:00:00"}
+          </Text>
+        )}
+      </Box>
+      {!props.play && !props.timer && (
+        <Button bg="gray.200" onClick={handleClick}>
+          <FontAwesomeIcon icon={faTrash} size="lg" />
+        </Button>
+      )}
+      {props.play && (
+        <Button bg="gray.200" onClick={() => props.start(props.name, props.id)}>
+          Start
+        </Button>
+      )}
     </Flex>
   );
 }
