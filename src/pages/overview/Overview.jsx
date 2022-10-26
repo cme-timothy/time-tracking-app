@@ -5,7 +5,7 @@ import AddTask from "../overview/AddTask";
 import Project from "../../components/Project";
 import Task from "../../components/Task";
 import { DataContext } from "../../contexts/DataContext";
-import { nanoid } from "nanoid";
+import { v4 as uuidv4 } from "uuid";
 
 function Overview() {
   const [menuToggle, setMenuToggle] = useState(true);
@@ -56,7 +56,7 @@ function Overview() {
             {projects.map((data) => {
               return (
                 <Project
-                  key={nanoid()}
+                  key={data.name}
                   name={data.name}
                   color={data.color}
                   id={data.id}
@@ -65,18 +65,18 @@ function Overview() {
             })}
           </Flex>
         ) : (
-          <Flex direction="column">
+          <>
             {projects.map((projectData) => {
               return (
-                <>
-                  <Text key={nanoid()} ml="1em" fontSize="lg" color="gray.500">
+                <Flex direction="column" key={uuidv4()}>
+                  <Text ml="1em" fontSize="lg" color="gray.500">
                     {projectData.name}
                   </Text>
                   {tasks.map((taskData) => {
                     if (projectData.name === taskData.project) {
                       return (
                         <Task
-                          key={nanoid()}
+                          key={uuidv4()}
                           name={taskData.name}
                           color={taskData.color}
                           id={taskData.id}
@@ -84,10 +84,10 @@ function Overview() {
                       );
                     }
                   })}
-                </>
+                </Flex>
               );
             })}
-          </Flex>
+          </>
         )}
 
         <Flex direction="column">

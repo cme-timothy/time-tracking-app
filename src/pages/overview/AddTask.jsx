@@ -31,8 +31,6 @@ function AddTask(props) {
   const { getTasks } = useContext(DataContext);
   const [date, setDate] = useState();
 
-  console.log(props.projects);
-
   useEffect(() => {
     async function postTask() {
       await axios

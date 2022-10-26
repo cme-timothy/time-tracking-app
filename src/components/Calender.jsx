@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { nanoid } from "nanoid";
+import { v4 as uuidv4 } from 'uuid';
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import DayButton from "./DayButton";
 
@@ -42,7 +42,7 @@ function Calender({ date }) {
 
   function activeDay(thisDay) {
     setDay(thisDay);
-    date(`${day} ${Object.keys(calenderYear)[month - 1]} ${year}`);
+    date(`${thisDay} ${Object.keys(calenderYear)[month - 1]} ${year}`);
   }
 
   function handleMonth(icon) {
@@ -93,7 +93,7 @@ function Calender({ date }) {
           if (today < 10) {
             return (
               <DayButton
-                key={nanoid()}
+                key={uuidv4()}
                 today={today}
                 day={day}
                 activeDay={activeDay}
@@ -103,7 +103,7 @@ function Calender({ date }) {
           } else {
             return (
               <DayButton
-                key={nanoid()}
+                key={uuidv4()}
                 today={today}
                 day={day}
                 activeDay={activeDay}
