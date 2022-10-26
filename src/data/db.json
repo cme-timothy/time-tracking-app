@@ -1,10 +1,4 @@
 {
   "tasks": [],
-  "projects": [
-    {
-      "name": "Project",
-      "color": "blue.500",
-      "id": 1
-    }
-  ]
+  "projects": []
 }
