@@ -19,7 +19,7 @@ function AddProject() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [inputValue, setInputValue] = useState("");
   const [projectName, setProjectName] = useState();
-  const { getProjects } = useContext(DataContext);
+  const { getProjects, getTasks } = useContext(DataContext);
   const [projectColor, setProjectColor] = useState("blue.500");
 
   function addProjectColor(color) {
@@ -45,6 +45,7 @@ function AddProject() {
           console.log(error.config);
         });
       getProjects();
+      getTasks();
     }
     if (inputValue !== "") {
       postProject();
