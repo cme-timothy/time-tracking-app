@@ -19,7 +19,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { DataContext } from "../../contexts/DataContext";
-import Calender from "../../components/Calender";
+import Calender from "./Calender";
 
 function AddTask(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
