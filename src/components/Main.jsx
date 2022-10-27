@@ -6,9 +6,9 @@ import History from "../pages/history/History";
 function Main() {
   return (
     <Routes>
-      <Route path="/" element={<Overview />} />
       <Route path="/Timer" element={<Timer />} />
       <Route path="/History" element={<History />} />
+      <Route path="/" element={<Overview />} />
     </Routes>
   );
 }

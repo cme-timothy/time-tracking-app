@@ -5,17 +5,41 @@ import {
   faCalendar,
   faStopwatch,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
-import { Link as ReachLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link as ReachLink, useLocation } from "react-router-dom";
+
 function Header() {
-  const [buttonClick, setButtonClick] = useState({
+  let location = useLocation();
+  const [headerButton, setHeaderButton] = useState({
     stopWatch: "gray.200",
     calendar: "gray.200",
-    briefcase: "white",
+    briefcase: "gray.200",
   });
 
+  useEffect(() => {
+    if (location.pathname === "/Timer") {
+      setHeaderButton({
+        stopWatch: "white",
+        calendar: "gray.200",
+        briefcase: "gray.200",
+      });
+    } else if (location.pathname === "/History") {
+      setHeaderButton({
+        stopWatch: "gray.200",
+        calendar: "white",
+        briefcase: "gray.200",
+      });
+    } else {
+      setHeaderButton({
+        stopWatch: "gray.200",
+        calendar: "gray.200",
+        briefcase: "white",
+      });
+    }
+  }, []);
+
   function handleClick(stopWatch, calendar, briefcase) {
-    setButtonClick({
+    setHeaderButton({
       stopWatch: stopWatch,
       calendar: calendar,
       briefcase: briefcase,
@@ -31,8 +55,8 @@ function Header() {
           h="4em"
           align="center"
           p="0.5em"
-          _hover={{bg: "white"}}
-          bg={buttonClick.stopWatch}
+          _hover={{ bg: "white" }}
+          bg={headerButton.stopWatch}
         >
           <FontAwesomeIcon icon={faStopwatch} size="3x" />
         </Button>
@@ -44,8 +68,8 @@ function Header() {
           h="4em"
           align="center"
           p="0.5em"
-          _hover={{bg: "white"}}
-          bg={buttonClick.calendar}
+          _hover={{ bg: "white" }}
+          bg={headerButton.calendar}
         >
           <FontAwesomeIcon icon={faCalendar} size="3x" />
         </Button>
@@ -57,8 +81,8 @@ function Header() {
           h="4em"
           align="center"
           p="0.5em"
-          _hover={{bg: "white"}}
-          bg={buttonClick.briefcase}
+          _hover={{ bg: "white" }}
+          bg={headerButton.briefcase}
         >
           <FontAwesomeIcon icon={faBriefcase} size="3x" />
         </Button>
