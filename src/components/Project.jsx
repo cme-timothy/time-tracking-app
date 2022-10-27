@@ -6,7 +6,7 @@ import { DataContext } from "../contexts/DataContext";
 import { useContext } from "react";
 
 function Project(props) {
-  const { getProjects, getTasks } = useContext(DataContext);
+  const { getProjects } = useContext(DataContext);
 
   function handleClick() {
     async function deleteProject() {
@@ -30,6 +30,7 @@ function Project(props) {
 
   return (
     <Flex
+      h="5em"
       justify="space-between"
       align="center"
       m="1em"

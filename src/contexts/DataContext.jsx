@@ -53,8 +53,6 @@ export function DataProvider({ children }) {
   };
 
   return (
-    <DataContext.Provider value={dataValue}>
-      {children}
-    </DataContext.Provider>
+    <DataContext.Provider value={dataValue}>{children}</DataContext.Provider>
   );
 }
