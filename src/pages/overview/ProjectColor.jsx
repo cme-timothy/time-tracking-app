@@ -17,12 +17,12 @@ function ProjectColor({ addProjectColor }) {
   }
 
   return (
-    <Popover placement="right-start">
+    <Popover>
       <PopoverTrigger>
         <Button mt="1em" bg={bg} w="3em" h="3em"></Button>
       </PopoverTrigger>
-      <PopoverContent>
-        <PopoverArrow />
+      <PopoverContent align="center" ml="0.5em" w="100%">
+        <PopoverArrow ml="-0.5em"/>
         <PopoverBody>
           <Button
             onClick={() => handleColorClick("blue.500")}
