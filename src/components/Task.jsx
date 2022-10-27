@@ -1,6 +1,10 @@
 import { Flex, Text, Button, Box } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrash,
+  faCirclePlay,
+  faCircleStop,
+} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { DataContext } from "../contexts/DataContext";
 import { useContext } from "react";
@@ -8,7 +12,7 @@ import { useContext } from "react";
 function Task(props) {
   const { getTasks } = useContext(DataContext);
 
-  function handleClick() {
+  function handleDelete() {
     async function deleteTask() {
       await axios
         .delete(`http://localhost:4000/tasks/${props.id}`)
@@ -28,8 +32,13 @@ function Task(props) {
     deleteTask();
   }
 
+  function handlePlayButton() {
+    props.handleTime(props.name, props.id, props.seconds);
+  }
+
   return (
     <Flex
+      h="5em"
       justify="space-between"
       align="center"
       m="1em"
@@ -44,18 +53,33 @@ function Task(props) {
         </Text>
         {props.timer && (
           <Text fontSize="md" color="gray.500">
-            {props.saveTime === props.id ? props.time : "00:00:00"}
+            {props.timerId === props.id ? props.currentTime : props.startingTime}
           </Text>
         )}
       </Box>
       {!props.play && !props.timer && (
-        <Button bg="gray.200" onClick={handleClick}>
+        <Button bg="gray.200" onClick={handleDelete}>
           <FontAwesomeIcon icon={faTrash} size="lg" />
         </Button>
       )}
       {props.play && (
-        <Button bg="gray.200" onClick={() => props.start(props.name, props.id)}>
-          Start
+        <Button p={0} mr="1em" bg="gray.200" onClick={handlePlayButton}>
+          {props.timerId !== props.id ? (
+            <Box color="green.500">
+              <FontAwesomeIcon icon={faCirclePlay} size="2xl" />
+            </Box>
+          ) : props.timerId === props.id && !props.playButton ? (
+            <Box color="green.500">
+              <FontAwesomeIcon icon={faCirclePlay} size="2xl" />
+            </Box>
+          ) : (
+            props.timerId === props.id &&
+            props.playButton && (
+              <Box color="red.500">
+                <FontAwesomeIcon icon={faCircleStop} size="2xl" />
+              </Box>
+            )
+          )}
         </Button>
       )}
     </Flex>

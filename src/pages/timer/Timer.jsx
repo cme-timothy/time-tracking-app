@@ -3,10 +3,12 @@ import { useEffect, useState, useContext } from "react";
 import { DataContext } from "../../contexts/DataContext";
 import Task from "../../components/Task";
 import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 
 function Timer() {
   const { tasks, getTasks } = useContext(DataContext);
   const [running, setRunning] = useState(false);
+  const [playButton, setPlayButton] = useState(false);
   const [time, setTime] = useState(0);
   const [saveTime, setSaveTime] = useState("");
   const [task, setTask] = useState("Choose Task");
@@ -38,16 +40,50 @@ function Timer() {
     setSaveTime(thisTime);
   }, [time]);
 
-  function handleTime(name, id) {
-    if (taskId === "" || taskId === id) {
+  function patchingTask(id) {
+    async function patchTask() {
+      await axios
+        .patch(`http://localhost:4000/tasks/${id}`, {
+          time: saveTime,
+          seconds: time,
+        })
+        .catch(function (error) {
+          if (error.response) {
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+      getTasks();
+    }
+    patchTask();
+  }
+
+  function handleTime(name, id, seconds) {
+    if (taskId === "") {
       setTaskId(id);
       setTask(name);
+      setTime(seconds);
       setRunning(!running);
+      setPlayButton(!playButton);
+    } else if (taskId === id) {
+      patchingTask(id);
+      setTaskId(id);
+      setTask(name);
+      setTime(time);
+      setRunning(!running);
+      setPlayButton(!playButton);
     } else {
+      patchingTask(taskId);
       setTaskId(id);
       setTask(name);
-      setTime(0);
-      setRunning(!running);
+      setTime(seconds);
+      setRunning(true);
+      setPlayButton(true);
     }
   }
 
@@ -75,11 +111,14 @@ function Timer() {
                 name={taskData.name}
                 color={taskData.color}
                 id={taskData.id}
-                play={true}
-                timer={true}
-                time={saveTime}
-                saveTime={taskId}
-                start={handleTime}
+                startingTime={taskData.time}
+                seconds={taskData.seconds}
+                play
+                timer
+                currentTime={saveTime}
+                timerId={taskId}
+                playButton={playButton}
+                handleTime={handleTime}
               />
             </Flex>
           );

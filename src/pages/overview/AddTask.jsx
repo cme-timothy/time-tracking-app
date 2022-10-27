@@ -39,7 +39,8 @@ function AddTask(props) {
           color: projectColor,
           name: taskName,
           date: date,
-          time: "00:00:00"
+          time: "00:00:00",
+          seconds: 0,
         })
         .catch(function (error) {
           if (error.response) {

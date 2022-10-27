@@ -21,14 +21,18 @@ function History() {
   const [dates, setDates] = useState([]);
   const [date, setDate] = useState("");
 
-  useEffect(() => {
-    getTasks();
-    const data = Array.from(new Set(tasks.map((item) => item.date)));
-    setDates(data);
-    if (date !== data[0] && dates.length === 0) {
-      setDate(data[0]);
-    }
-  }, [date]);
+  useEffect(
+    () => {
+      getTasks();
+      const data = Array.from(new Set(tasks.map((item) => item.date)));
+      setDates(data);
+      if (date !== data[0] && dates.length === 0) {
+        setDate(data[0]);
+      }
+    },
+    [date],
+    []
+  );
 
   function handleMenuClick(date) {
     setDate(date);
@@ -82,7 +86,8 @@ function History() {
                   name={taskData.name}
                   color={taskData.color}
                   id={taskData.id}
-                  timer={true}
+                  startingTime={taskData.time}
+                  timer
                 />
               );
             }
