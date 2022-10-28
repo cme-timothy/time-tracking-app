@@ -10,6 +10,7 @@ import {
   Tooltip,
   Box,
 } from "@chakra-ui/react";
+import { Helmet } from "react-helmet-async";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useState, useContext, useEffect } from "react";
 import { DataContext } from "../../contexts/DataContext";
@@ -40,6 +41,9 @@ function History() {
 
   return (
     <>
+      <Helmet>
+        <title>Task history</title>
+      </Helmet>
       <Box position="fixed" top="0" width="100%" zIndex={1}>
         <Heading m={0} p="1.5em" bg={"gray.200"} align="center">
           History

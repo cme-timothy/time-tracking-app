@@ -1,4 +1,5 @@
 import { Flex, Heading, Button, Box, Tooltip, Text } from "@chakra-ui/react";
+import { Helmet } from "react-helmet-async";
 import { useState, useEffect, useContext } from "react";
 import AddProject from "../overview/AddProject";
 import AddTask from "../overview/AddTask";
@@ -18,6 +19,9 @@ function Overview() {
 
   return (
     <>
+      <Helmet>
+        <title>Time tracking app</title>
+      </Helmet>
       <Box position="fixed" top="0" width="100%" zIndex={1}>
         <Heading m={0} p="1.5em" bg={"gray.200"} align="center">
           Overview
