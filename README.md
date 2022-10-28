@@ -4,6 +4,8 @@ This project is being built with [React](https://reactjs.org/) and [Create React
 
 I built a functioning timer and calender without using external libraries. The calendar currently has no adjustments for leap days.
 
+The application is optimised for phone browsers, specifically iPhone SE.
+
 ## NPM packets installed:
 
 I used react helmet async for adding page descriptions. Fontawesome solid SVG icons for the applications header icons. UUID for creating unique component keys and Axios for more straightforward fetch requests.
