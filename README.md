@@ -1,6 +1,12 @@
 # Time tracking app
 
-This is a time tracking app. This project is built with [React](https://reactjs.org/) and [Create React App](https://create-react-app.dev/) as its starting template.
+This project is being built with [React](https://reactjs.org/) and [Create React App](https://create-react-app.dev/) as its starting template. I used [Chakra UI](https://chakra-ui.com/) as my prefered way of styling this applikation.
+
+I built a functioning timer and calender without using external libraries. The calendar currently has no adjustments for leap days.
+
+## NPM packets installed:
+
+I used react helmet async for adding page descriptions. Fontawesome solid SVG icons for the applications header icons. UUID for creating unique component keys and Axios for more straightforward fetch requests.
 
 ## Pre-requisites
 
@@ -33,7 +39,7 @@ npm run start
 To setup a local JSON server, run:
 
 ```
-json-server --watch src/data/db.json --port 4000   
+json-server --watch src/data/db.json --port 4000
 ```
 
 ## How to build a production bundle
